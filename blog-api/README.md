@@ -24,6 +24,7 @@ not for take-home test:
 ## Run in Local
 
 - For first time load, run this command: bundle install
+  - You might also need to run this: bundle exec rails db:migrate
 - To start server: bundle exec rails server
 
 ## Initial Setup 

@@ -6,12 +6,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Test in Local Manually
 
-- Go to home page: http://localhost:3000/
+- Go to home page (Post List page): http://localhost:3000/
   - Make sure posts are displayed correctly
 - Go to User Setting page
   - http://localhost:3000/settings
-  - Sign up then sign in
-- Test adding new post
+  - Sign up or sign in
+- Go to Add New Post page
+  - http://localhost:3000/newPost
+  - Try adding a new page
+  - Check that it's displayed in the home page (Post List page)
 
 ## Frontend Setup
 
