@@ -1,0 +1,1 @@
+include all test files in tsconfig.json in the include property array

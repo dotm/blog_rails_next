@@ -2,7 +2,6 @@
 
 ## TODO
 
-- create unit test for BE and FE
 - Dockerize?
 
 not for take-home test:

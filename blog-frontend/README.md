@@ -2,7 +2,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Run in Local
 
+- npm install
 - npm run dev
+
+## Run unit test
+
+- npm run test
 
 ## Test in Local Manually
 
@@ -21,6 +26,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - npx create-next-app@latest app-fe-nextjs-module
   - use TypeScript, ESLint, Tailwind CSS, src dir, Pages Router (not App Router)
   - don't use import alias
+- Unit test: (https://nextjs.org/docs/pages/building-your-application/testing/jest)
+  - npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event ts-node ts-jest enzyme @cfaester/enzyme-adapter-react-18 msw@latest msw/node undici
+  - npm init jest@latest
 
 ## Getting Started
 

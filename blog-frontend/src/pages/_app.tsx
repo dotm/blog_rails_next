@@ -13,7 +13,7 @@ export default function App({
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Head>
-          <title>Delcius Daily</title>
+          <title>Blog Rails + Next.js</title>
         </Head>
         <Component {...pageProps} />
       </PersistGate>
