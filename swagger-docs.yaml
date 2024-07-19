@@ -1,0 +1,571 @@
+openapi: 3.0.0
+info:
+  title: rails-blog-api
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /posts:
+    post:
+      tags:
+        - default
+      summary: Create Post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: Test Title 2
+                content: Test Content 2
+      security:
+        - bearerAuth: []
+      responses:
+        '201':
+          description: Created
+          headers:
+            x-frame-options:
+              schema:
+                type: string
+                example: SAMEORIGIN
+            x-xss-protection:
+              schema:
+                type: integer
+                example: '0'
+            x-content-type-options:
+              schema:
+                type: string
+                example: nosniff
+            x-permitted-cross-domain-policies:
+              schema:
+                type: string
+                example: none
+            referrer-policy:
+              schema:
+                type: string
+                example: strict-origin-when-cross-origin
+            location:
+              schema:
+                type: string
+                example: http://localhost:3001/posts/7
+            content-type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            vary:
+              schema:
+                type: string
+                example: Accept, Origin
+            etag:
+              schema:
+                type: string
+                example: W/"89d07f607a6a0c4ddc9f096a1e5c4988"
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, private, must-revalidate
+            x-request-id:
+              schema:
+                type: string
+                example: f1da86f7-ec4b-4c30-9b73-ce97db6b1a19
+            x-runtime:
+              schema:
+                type: number
+                example: '0.347790'
+            server-timing:
+              schema:
+                type: string
+                example: >-
+                  sql.active_record;dur=10.98,
+                  start_processing.action_controller;dur=0.00,
+                  instantiation.active_record;dur=2.97,
+                  transaction.active_record;dur=13.06,
+                  process_action.action_controller;dur=34.09
+            Content-Length:
+              schema:
+                type: integer
+                example: '159'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  id: 7
+                  user_id: 2
+                  title: Test Title 2
+                  content: Test Content 2
+                  created_at: '2024-07-19T07:25:51.971Z'
+                  updated_at: '2024-07-19T07:25:51.971Z'
+        '401':
+          description: Unauthorized
+          headers:
+            content-type:
+              schema:
+                type: string
+                example: '*/*; charset=utf-8'
+            cache-control:
+              schema:
+                type: string
+                example: no-cache
+            x-request-id:
+              schema:
+                type: string
+                example: 2fadb65a-0133-40df-8590-69e2e27167ec
+            x-runtime:
+              schema:
+                type: number
+                example: '0.071233'
+            server-timing:
+              schema:
+                type: string
+                example: >-
+                  start_processing.action_controller;dur=0.01,
+                  process_action.action_controller;dur=0.57
+            vary:
+              schema:
+                type: string
+                example: Origin
+            Content-Length:
+              schema:
+                type: integer
+                example: '62'
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: '{"error": "You need to sign in or sign up before continuing."}'
+    get:
+      tags:
+        - default
+      summary: All Post
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: '2'
+        - name: last_oldest_post_id
+          in: query
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: OK
+          headers:
+            x-frame-options:
+              schema:
+                type: string
+                example: SAMEORIGIN
+            x-xss-protection:
+              schema:
+                type: integer
+                example: '0'
+            x-content-type-options:
+              schema:
+                type: string
+                example: nosniff
+            x-permitted-cross-domain-policies:
+              schema:
+                type: string
+                example: none
+            referrer-policy:
+              schema:
+                type: string
+                example: strict-origin-when-cross-origin
+            content-type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            vary:
+              schema:
+                type: string
+                example: Accept, Origin
+            etag:
+              schema:
+                type: string
+                example: W/"3d7a366520ed7f0d14d78b62c059ed8d"
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, private, must-revalidate
+            x-request-id:
+              schema:
+                type: string
+                example: 18ebcad1-15af-4e7c-a35f-422f29d0e43b
+            x-runtime:
+              schema:
+                type: number
+                example: '0.084563'
+            server-timing:
+              schema:
+                type: string
+                example: >-
+                  start_processing.action_controller;dur=0.01,
+                  sql.active_record;dur=0.13,
+                  instantiation.active_record;dur=0.09,
+                  process_action.action_controller;dur=5.99
+            Content-Length:
+              schema:
+                type: integer
+                example: '312'
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Success First Page Load
+                  value:
+                    data:
+                      - id: 7
+                        user_id: 2
+                        title: Test Title 2
+                        content: Test Content 2
+                        created_at: '2024-07-19T07:25:51.971Z'
+                        updated_at: '2024-07-19T07:25:51.971Z'
+                      - id: 6
+                        user_id: 2
+                        title: Test Title 2
+                        content: Test Content 2
+                        created_at: '2024-07-19T07:24:49.035Z'
+                        updated_at: '2024-07-19T07:24:49.035Z'
+                example-1:
+                  summary: Success Second Page Load
+                  value:
+                    data:
+                      - id: 5
+                        user_id: 2
+                        title: Test Title 2
+                        content: Test Content 2
+                        created_at: '2024-07-18T14:23:09.913Z'
+                        updated_at: '2024-07-18T14:23:09.913Z'
+                      - id: 4
+                        user_id: 1
+                        title: Test Title 2
+                        content: Test Content 2
+                        created_at: '2024-07-18T14:22:40.445Z'
+                        updated_at: '2024-07-18T14:22:40.445Z'
+                example-2:
+                  summary: Success End of Page
+                  value:
+                    data: []
+  /signup:
+    post:
+      tags:
+        - default
+      summary: Sign Up
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                user:
+                  email: test-user-2@yopmail.com
+                  password: password
+      responses:
+        '200':
+          description: OK
+          headers:
+            x-frame-options:
+              schema:
+                type: string
+                example: SAMEORIGIN
+            x-xss-protection:
+              schema:
+                type: integer
+                example: '0'
+            x-content-type-options:
+              schema:
+                type: string
+                example: nosniff
+            x-permitted-cross-domain-policies:
+              schema:
+                type: string
+                example: none
+            referrer-policy:
+              schema:
+                type: string
+                example: strict-origin-when-cross-origin
+            authorization:
+              schema:
+                type: string
+                example: >-
+                  Bearer
+                  eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5M2IyY2M0Ny0zYWY0LTQ3NjUtOTZmMS1kYzIxMTY4YTM3YTMiLCJzdWIiOiI1Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzIxMzc0Mzg3LCJleHAiOjE3MjE0NjA3ODd9.DcKuzUfS1xvaWXGygCP19PIhqE8d0e0sRgwBV5XVvoI
+            content-type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            set-cookie:
+              schema:
+                type: string
+                example: >-
+                  _interslice_session=Zmg96LWZwX60rHnnO%2B5ufFf4mOoIzhbSMlMJhZ2Rj28jNxiAUPHXGAbIo7BgD%2Bv2DcjMdVaKoBQlejrBK1uGn2wjxy37Ht8Njc%2Bq2R%2FkbTWUmpSAjDNhrOYIn%2FPZomlTJiomSkKkC1tbsLE8QJBdeT8JGG2r3JGhDQzjbfp4Doa8HPbRniAO9i%2FL11L0ZXOkZ3SU0hP3lNeVv4ghJ%2Bmkdfq4DnhxHpvq4AWy3favnD9%2BvF6mV3az3A7XUZAy8aQJF294q6Ejrj37YOBJb9mygRjbbuRzxyFfKtNd--j5mV3viPfNpRRctV--qyYP7aJHhfslzf3X9Po10g%3D%3D;
+                  path=/; httponly; samesite=lax
+            etag:
+              schema:
+                type: string
+                example: W/"51071f75cacaa512412487b6ae1d92b5"
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, private, must-revalidate
+            x-request-id:
+              schema:
+                type: string
+                example: 12d580b4-d4c7-4b9b-8faf-543789bbaa98
+            x-runtime:
+              schema:
+                type: number
+                example: '0.414961'
+            server-timing:
+              schema:
+                type: string
+                example: >-
+                  start_processing.action_controller;dur=0.01,
+                  sql.active_record;dur=13.69,
+                  transaction.active_record;dur=17.74,
+                  process_action.action_controller;dur=339.56
+            vary:
+              schema:
+                type: string
+                example: Origin
+            Content-Length:
+              schema:
+                type: integer
+                example: '326'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  id: 5
+                  email: test-user-0@yopmail.com
+                  code: 200
+                  message: Signed up successfully.
+                  token: >-
+                    eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5M2IyY2M0Ny0zYWY0LTQ3NjUtOTZmMS1kYzIxMTY4YTM3YTMiLCJzdWIiOiI1Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzIxMzc0Mzg3LCJleHAiOjE3MjE0NjA3ODd9.DcKuzUfS1xvaWXGygCP19PIhqE8d0e0sRgwBV5XVvoI
+        '422':
+          description: Unprocessable Content
+          headers:
+            x-frame-options:
+              schema:
+                type: string
+                example: SAMEORIGIN
+            x-xss-protection:
+              schema:
+                type: integer
+                example: '0'
+            x-content-type-options:
+              schema:
+                type: string
+                example: nosniff
+            x-permitted-cross-domain-policies:
+              schema:
+                type: string
+                example: none
+            referrer-policy:
+              schema:
+                type: string
+                example: strict-origin-when-cross-origin
+            content-type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            cache-control:
+              schema:
+                type: string
+                example: no-cache
+            x-request-id:
+              schema:
+                type: string
+                example: 8c8314a6-03af-49c7-bc05-096361fba51d
+            x-runtime:
+              schema:
+                type: number
+                example: '0.405282'
+            server-timing:
+              schema:
+                type: string
+                example: >-
+                  start_processing.action_controller;dur=0.01,
+                  sql.active_record;dur=2.21,
+                  transaction.active_record;dur=4.36,
+                  process_action.action_controller;dur=324.59
+            vary:
+              schema:
+                type: string
+                example: Origin
+            Content-Length:
+              schema:
+                type: integer
+                example: '79'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: >-
+                  User couldn't be created successfully. Email has already been
+                  taken
+  /login:
+    post:
+      tags:
+        - default
+      summary: Sign In
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                user:
+                  email: test-user-2@yopmail.com
+                  password: password
+      responses:
+        '200':
+          description: OK
+          headers:
+            x-frame-options:
+              schema:
+                type: string
+                example: SAMEORIGIN
+            x-xss-protection:
+              schema:
+                type: integer
+                example: '0'
+            x-content-type-options:
+              schema:
+                type: string
+                example: nosniff
+            x-permitted-cross-domain-policies:
+              schema:
+                type: string
+                example: none
+            referrer-policy:
+              schema:
+                type: string
+                example: strict-origin-when-cross-origin
+            authorization:
+              schema:
+                type: string
+                example: >-
+                  Bearer
+                  eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5M2IyY2M0Ny0zYWY0LTQ3NjUtOTZmMS1kYzIxMTY4YTM3YTMiLCJzdWIiOiI1Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzIxMzc0NTMzLCJleHAiOjE3MjE0NjA5MzN9.KUi53lFjWraBSSAYNupi7SL5esSdsllZTRRACrFtnu8
+            content-type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            set-cookie:
+              schema:
+                type: string
+                example: >-
+                  _interslice_session=ptWvovwS0uewu06xIA0jv3WkwTqC3VxTfblzYkFMCbinX20yZmKVcMwwmtz29I3b6J%2FIrwG2fFXWi02nkAPX1G8LqZiAG%2FlPgArSF7KDHG3VMlgOUdlSwIz0vngQp%2FGAcznltIPQ39qRZOIQO9wY8ZRGbRMU20N1iXzXdK32x%2B%2F1QtC%2FSn9ET68dea%2B7GzNnsahPRQck1XxKOn07L8VHqu9ycioyf2rCit5IxlHHBKcoQvwZJ18FqC43yXv7YOBqnp8ZVyku7JKNcki8zl3%2FWL%2FMfDtXx7FdUM4I--G5sj2GsXPFhwHKgW--2E6ipbEct50YOgQtPXEMJQ%3D%3D;
+                  path=/; httponly; samesite=lax
+            etag:
+              schema:
+                type: string
+                example: W/"0bf7b66b114e3d52b19ac48d36baed96"
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, private, must-revalidate
+            x-request-id:
+              schema:
+                type: string
+                example: 02c85055-c1c4-4cbb-84b0-a36f6e1634d1
+            x-runtime:
+              schema:
+                type: number
+                example: '0.192949'
+            server-timing:
+              schema:
+                type: string
+                example: >-
+                  start_processing.action_controller;dur=0.01,
+                  sql.active_record;dur=2.57,
+                  instantiation.active_record;dur=2.67,
+                  process_action.action_controller;dur=11.32
+            vary:
+              schema:
+                type: string
+                example: Origin
+            Content-Length:
+              schema:
+                type: integer
+                example: '326'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  id: 5
+                  email: test-user-0@yopmail.com
+                  code: 200
+                  message: Logged in successfully.
+                  token: >-
+                    eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5M2IyY2M0Ny0zYWY0LTQ3NjUtOTZmMS1kYzIxMTY4YTM3YTMiLCJzdWIiOiI1Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzIxMzc0NTMzLCJleHAiOjE3MjE0NjA5MzN9.KUi53lFjWraBSSAYNupi7SL5esSdsllZTRRACrFtnu8
+        '401':
+          description: Unauthorized
+          headers:
+            content-type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            cache-control:
+              schema:
+                type: string
+                example: no-cache
+            x-request-id:
+              schema:
+                type: string
+                example: 26b33f46-45c7-4915-af7d-8c3486790e50
+            x-runtime:
+              schema:
+                type: number
+                example: '0.620508'
+            server-timing:
+              schema:
+                type: string
+                example: >-
+                  start_processing.action_controller;dur=0.01,
+                  sql.active_record;dur=3.71,
+                  instantiation.active_record;dur=2.77,
+                  process_action.action_controller;dur=307.77
+            vary:
+              schema:
+                type: string
+                example: Origin
+            Content-Length:
+              schema:
+                type: integer
+                example: '54'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: false
+                error: Invalid Email or password.
+  /logout:
+    delete:
+      tags:
+        - default
+      summary: Sign Out
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

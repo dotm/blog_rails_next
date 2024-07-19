@@ -2,7 +2,6 @@
 
 ## TODO
 
-- generate Swagger docs
 - create unit test for BE and FE
 - Dockerize?
 

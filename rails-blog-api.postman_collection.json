@@ -1,0 +1,911 @@
+{
+	"info": {
+		"_postman_id": "771f1705-58c2-4535-b204-6ffcc227d8f5",
+		"name": "rails-blog-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3694011"
+	},
+	"item": [
+		{
+			"name": "Create Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5OWJjZGJhZS00ZDgxLTQ5NjItOTU4Yi0zYWQzYmY3ZGY5YWUiLCJzdWIiOiIyIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzIxMzEyNTc0LCJleHAiOjE3MjEzOTg5NzR9.GqZvWvhSc4fy-hMnCJzso6IS39ai3SYN4aCC7BDDR48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Test Title 2\",\r\n    \"content\": \"Test Content 2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test Title 2\",\r\n    \"content\": \"Test Content 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "location",
+							"value": "http://localhost:3001/posts/7"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"89d07f607a6a0c4ddc9f096a1e5c4988\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "f1da86f7-ec4b-4c30-9b73-ce97db6b1a19"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.347790"
+						},
+						{
+							"key": "server-timing",
+							"value": "sql.active_record;dur=10.98, start_processing.action_controller;dur=0.00, instantiation.active_record;dur=2.97, transaction.active_record;dur=13.06, process_action.action_controller;dur=34.09"
+						},
+						{
+							"key": "Content-Length",
+							"value": "159"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 7,\n        \"user_id\": 2,\n        \"title\": \"Test Title 2\",\n        \"content\": \"Test Content 2\",\n        \"created_at\": \"2024-07-19T07:25:51.971Z\",\n        \"updated_at\": \"2024-07-19T07:25:51.971Z\"\n    }\n}"
+				},
+				{
+					"name": "Error Not Logged In",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test Title 2\",\r\n    \"content\": \"Test Content 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "raw",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "*/*; charset=utf-8"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "x-request-id",
+							"value": "2fadb65a-0133-40df-8590-69e2e27167ec"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.071233"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, process_action.action_controller;dur=0.57"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Length",
+							"value": "62"
+						}
+					],
+					"cookie": [],
+					"body": "{\"error\": \"You need to sign in or sign up before continuing.\"}"
+				}
+			]
+		},
+		{
+			"name": "All Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/posts?limit=2&last_oldest_post_id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "last_oldest_post_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success First Page Load",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/posts?limit=2&last_oldest_post_id=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "last_oldest_post_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"3d7a366520ed7f0d14d78b62c059ed8d\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "18ebcad1-15af-4e7c-a35f-422f29d0e43b"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.084563"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=0.13, instantiation.active_record;dur=0.09, process_action.action_controller;dur=5.99"
+						},
+						{
+							"key": "Content-Length",
+							"value": "312"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 7,\n            \"user_id\": 2,\n            \"title\": \"Test Title 2\",\n            \"content\": \"Test Content 2\",\n            \"created_at\": \"2024-07-19T07:25:51.971Z\",\n            \"updated_at\": \"2024-07-19T07:25:51.971Z\"\n        },\n        {\n            \"id\": 6,\n            \"user_id\": 2,\n            \"title\": \"Test Title 2\",\n            \"content\": \"Test Content 2\",\n            \"created_at\": \"2024-07-19T07:24:49.035Z\",\n            \"updated_at\": \"2024-07-19T07:24:49.035Z\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "Success Second Page Load",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/posts?limit=2&last_oldest_post_id=6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "last_oldest_post_id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"b6858593eba2f2d61368eba2686fee5a\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "278c8756-a104-4c24-bd3d-dcd4733894f9"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.080509"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=0.15, instantiation.active_record;dur=0.14, process_action.action_controller;dur=4.99"
+						},
+						{
+							"key": "Content-Length",
+							"value": "312"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 5,\n            \"user_id\": 2,\n            \"title\": \"Test Title 2\",\n            \"content\": \"Test Content 2\",\n            \"created_at\": \"2024-07-18T14:23:09.913Z\",\n            \"updated_at\": \"2024-07-18T14:23:09.913Z\"\n        },\n        {\n            \"id\": 4,\n            \"user_id\": 1,\n            \"title\": \"Test Title 2\",\n            \"content\": \"Test Content 2\",\n            \"created_at\": \"2024-07-18T14:22:40.445Z\",\n            \"updated_at\": \"2024-07-18T14:22:40.445Z\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "Success End of Page",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/posts?limit=2&last_oldest_post_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "last_oldest_post_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"8fe32e407a1038ee38753b70e5374b3a\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "07767ec5-f24f-4e47-a920-76c0ea92ec60"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.123167"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=0.41, process_action.action_controller;dur=3.67"
+						},
+						{
+							"key": "Content-Length",
+							"value": "11"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"user\": {\r\n        \"email\": \"test-user-2@yopmail.com\",\r\n        \"password\": \"password\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"user\": {\r\n        \"email\": \"test-user-0@yopmail.com\",\r\n        \"password\": \"password\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5M2IyY2M0Ny0zYWY0LTQ3NjUtOTZmMS1kYzIxMTY4YTM3YTMiLCJzdWIiOiI1Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzIxMzc0Mzg3LCJleHAiOjE3MjE0NjA3ODd9.DcKuzUfS1xvaWXGygCP19PIhqE8d0e0sRgwBV5XVvoI"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "set-cookie",
+							"value": "_interslice_session=Zmg96LWZwX60rHnnO%2B5ufFf4mOoIzhbSMlMJhZ2Rj28jNxiAUPHXGAbIo7BgD%2Bv2DcjMdVaKoBQlejrBK1uGn2wjxy37Ht8Njc%2Bq2R%2FkbTWUmpSAjDNhrOYIn%2FPZomlTJiomSkKkC1tbsLE8QJBdeT8JGG2r3JGhDQzjbfp4Doa8HPbRniAO9i%2FL11L0ZXOkZ3SU0hP3lNeVv4ghJ%2Bmkdfq4DnhxHpvq4AWy3favnD9%2BvF6mV3az3A7XUZAy8aQJF294q6Ejrj37YOBJb9mygRjbbuRzxyFfKtNd--j5mV3viPfNpRRctV--qyYP7aJHhfslzf3X9Po10g%3D%3D; path=/; httponly; samesite=lax"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"51071f75cacaa512412487b6ae1d92b5\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "12d580b4-d4c7-4b9b-8faf-543789bbaa98"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.414961"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=13.69, transaction.active_record;dur=17.74, process_action.action_controller;dur=339.56"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Length",
+							"value": "326"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 5,\n        \"email\": \"test-user-0@yopmail.com\",\n        \"code\": 200,\n        \"message\": \"Signed up successfully.\",\n        \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5M2IyY2M0Ny0zYWY0LTQ3NjUtOTZmMS1kYzIxMTY4YTM3YTMiLCJzdWIiOiI1Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzIxMzc0Mzg3LCJleHAiOjE3MjE0NjA3ODd9.DcKuzUfS1xvaWXGygCP19PIhqE8d0e0sRgwBV5XVvoI\"\n    }\n}"
+				},
+				{
+					"name": "Error Email Is Taken",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"user\": {\r\n        \"email\": \"test-user-0@yopmail.com\",\r\n        \"password\": \"password\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "x-request-id",
+							"value": "8c8314a6-03af-49c7-bc05-096361fba51d"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.405282"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=2.21, transaction.active_record;dur=4.36, process_action.action_controller;dur=324.59"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Length",
+							"value": "79"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"User couldn't be created successfully. Email has already been taken\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Sign In",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"user\": {\r\n        \"email\": \"test-user-2@yopmail.com\",\r\n        \"password\": \"password\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"user\": {\r\n        \"email\": \"test-user-0@yopmail.com\",\r\n        \"password\": \"password\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5M2IyY2M0Ny0zYWY0LTQ3NjUtOTZmMS1kYzIxMTY4YTM3YTMiLCJzdWIiOiI1Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzIxMzc0NTMzLCJleHAiOjE3MjE0NjA5MzN9.KUi53lFjWraBSSAYNupi7SL5esSdsllZTRRACrFtnu8"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "set-cookie",
+							"value": "_interslice_session=ptWvovwS0uewu06xIA0jv3WkwTqC3VxTfblzYkFMCbinX20yZmKVcMwwmtz29I3b6J%2FIrwG2fFXWi02nkAPX1G8LqZiAG%2FlPgArSF7KDHG3VMlgOUdlSwIz0vngQp%2FGAcznltIPQ39qRZOIQO9wY8ZRGbRMU20N1iXzXdK32x%2B%2F1QtC%2FSn9ET68dea%2B7GzNnsahPRQck1XxKOn07L8VHqu9ycioyf2rCit5IxlHHBKcoQvwZJ18FqC43yXv7YOBqnp8ZVyku7JKNcki8zl3%2FWL%2FMfDtXx7FdUM4I--G5sj2GsXPFhwHKgW--2E6ipbEct50YOgQtPXEMJQ%3D%3D; path=/; httponly; samesite=lax"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"0bf7b66b114e3d52b19ac48d36baed96\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "02c85055-c1c4-4cbb-84b0-a36f6e1634d1"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.192949"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=2.57, instantiation.active_record;dur=2.67, process_action.action_controller;dur=11.32"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Length",
+							"value": "326"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 5,\n        \"email\": \"test-user-0@yopmail.com\",\n        \"code\": 200,\n        \"message\": \"Logged in successfully.\",\n        \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5M2IyY2M0Ny0zYWY0LTQ3NjUtOTZmMS1kYzIxMTY4YTM3YTMiLCJzdWIiOiI1Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzIxMzc0NTMzLCJleHAiOjE3MjE0NjA5MzN9.KUi53lFjWraBSSAYNupi7SL5esSdsllZTRRACrFtnu8\"\n    }\n}"
+				},
+				{
+					"name": "Error Wrong Password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"user\": {\r\n        \"email\": \"test-user-2@yopmail.com\",\r\n        \"password\": \"password1\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "x-request-id",
+							"value": "26b33f46-45c7-4915-af7d-8c3486790e50"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.620508"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=3.71, instantiation.active_record;dur=2.77, process_action.action_controller;dur=307.77"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Length",
+							"value": "54"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"error\": \"Invalid Email or password.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Sign Out",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NzkyMDRhYi02OTViLTQ3N2UtOTI1Zi1hNzBiZjNjMjk5ODQiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzIxMzEwNTI0LCJleHAiOjE3MjEzOTY5MjR9.ZK3FxhyHoFjPo6dqc7zm3vnWN2Zos3anu1Jf6fQa5ps",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
