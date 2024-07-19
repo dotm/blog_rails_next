@@ -18,4 +18,6 @@ Notes:
 - Database is using SQLite because it's relational and the simplest possible for this take-home test (might not be production ready).
 - Pagination is infinite but isn't auto-scroll (manual click for next page)
   - because there's not many post data (so we can test the next page functionality easily using low post per page count)
+    - the infinite scroll library doesn't work when using low page count.
   - for production, we can use `react-infinite-scroll-component` to implement auto-scroll.
+    - ***If you already have many posts in the database, you can checkout the use-infinite-scroll branch to check auto-scroll feature***
