@@ -27,11 +27,13 @@ export default function SignInForm() {
         }),
       })
       .then(response => response.json())
-      if(signInRespJson.status.code === 200){
+      if(signInRespJson.data){
         setLoggedInUserData({
-          token: signInRespJson.status.token,
-          email: signInRespJson.status.data.user.email,
+          token: signInRespJson.data.token,
+          email: signInRespJson.data.email,
         })
+      }else if(signInRespJson.error){
+        handleErrorInFrontend(signInRespJson.error)
       }
     } catch (error) {
       handleErrorInFrontend(error)

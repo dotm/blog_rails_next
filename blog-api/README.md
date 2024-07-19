@@ -7,13 +7,6 @@
   - get first page automatically
 - generate Swagger docs
 - create unit test for BE and FE
-- standardize response:
-  - APIs:
-    - failed login (invalid credential error) and failed registration (email registered)
-    - create and get post
-      - You need to sign in or sign up before continuing.
-      - if params[:user_id] != current_user.id
-  - example standardization: `{"data": "", "error": {"code": "", "message": ""}}`
 - Dockerize?
 
 not for take-home test:

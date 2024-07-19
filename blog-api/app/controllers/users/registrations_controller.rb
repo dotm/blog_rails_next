@@ -11,13 +11,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
       headers['Authorization'] = @token
 
       render json: {
-        status: { code: 200, message: 'Signed up successfully.',
-                  token: @token,
-                  data: UserSerializer.new(resource).serializable_hash[:data][:attributes] }
+      data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
+        .merge(
+          code: 200,
+          message: 'Signed up successfully.',
+          token: @token,
+        )
       }
     else
       render json: {
-        status: { message: "User couldn't be created successfully. #{resource.errors.full_messages.to_sentence}" }
+        error: "User couldn't be created. #{resource.errors.full_messages.to_sentence}"
       }, status: :unprocessable_entity
     end
   end

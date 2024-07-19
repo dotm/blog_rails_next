@@ -27,11 +27,13 @@ export default function SignUpForm() {
         }),
       })
       .then(response => response.json())
-      if(signUpRespJson.status.code === 200){
+      if(signUpRespJson.data){
         setLoggedInUserData({
-          token: signUpRespJson.status.token,
-          email: signUpRespJson.status.data.email,
+          token: signUpRespJson.data.token,
+          email: signUpRespJson.data.email,
         })
+      }else if(signUpRespJson.error){
+        handleErrorInFrontend(signUpRespJson.error)
       }
     } catch (error) {
       handleErrorInFrontend(error)

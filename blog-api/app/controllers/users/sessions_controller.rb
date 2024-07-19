@@ -10,13 +10,11 @@ class Users::SessionsController < Devise::SessionsController
     headers['Authorization'] = @token
 
     render json: {
-      status: {
-        code: 200, message: 'Logged in successfully.',
-        token: @token,
-        data: {
-          user: UserSerializer.new(resource).serializable_hash[:data][:attributes]
-        }
-      }
+      data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
+        .merge(
+          code: 200, message: 'Logged in successfully.',
+          token: @token,
+        )
     }, status: :ok
   end
 

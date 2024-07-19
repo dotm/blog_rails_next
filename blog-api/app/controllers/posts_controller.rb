@@ -13,23 +13,28 @@ class PostsController < ApplicationController
       @posts = Post.order(created_at: :desc).limit(limit)
     end
 
-    render json: @posts
+    render json: {"data": @posts}
   end
 
   # GET /posts/1
   def show
-    render json: @post
+    render json: {"data": @post}
   end
 
   # POST /posts
   def create
-    current_user = get_current_user_from_jwt
-    @post = Post.new(post_params.merge(user_id: current_user.id))
-
-    if @post.save
-      render json: @post, status: :created, location: @post
-    else
-      render json: @post.errors, status: :unprocessable_entity
+    begin
+      current_user = get_current_user_from_jwt
+      @post = Post.new(post_params.merge(user_id: current_user.id))
+  
+      if @post.save
+        render json: { "data": @post }, status: :created, location: @post
+      else
+        render json: { "error": @post.errors }, status: :unprocessable_entity
+      end
+  
+    rescue StandardError => e
+      render json: { "error": e.message }, status: :unprocessable_entity
     end
   end
 
@@ -59,8 +64,15 @@ class PostsController < ApplicationController
     end
 
     def get_current_user_from_jwt
-      jwt_payload = JWT.decode(request.headers['Authorization'].split.last,
-                               Rails.application.credentials.devise_jwt_secret_key!).first
+      authorization_header = request.headers['Authorization']
+      if authorization_header.nil?
+        raise StandardError, "You need to sign in first."
+      end
+
+      jwt_payload = JWT.decode(
+        authorization_header.split.last,
+        Rails.application.credentials.devise_jwt_secret_key!
+      ).first
 
       current_user = User.find(jwt_payload['sub'])
       return current_user
