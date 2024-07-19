@@ -1,5 +1,6 @@
-import { useLazyGetPostListQuery } from "@/redux/apiSlice";
+import { useAddNewPostMutation, useLazyGetPostListQuery } from "@/redux/apiSlice";
 import { LocalStorageKey } from "@/utils/constants";
+import { handleErrorInFrontend } from "@/utils/error";
 import { LoggedInUserData, PostData } from "@/utils/types";
 import Link from "next/link";
 import { useRouter } from 'next/router';
@@ -10,25 +11,26 @@ export default function PostAdd() {
   const router = useRouter()
   const [loggedInUserData, setLoggedInUserData] =
     useLocalStorage<LoggedInUserData | undefined>(LocalStorageKey.loggedInUser, undefined)
-  const [lastOldestPostId, setLastOldestPostId] = useState<number | undefined>(undefined)
-  const [pageLimit, setPageLimit] = useState(2)
-  const [reachedEndOfPage, setReachedEndOfPage] = useState(false)
-  const [trigger, result] = useLazyGetPostListQuery();
-  const [postList, setPostList] = useState<PostData[]>([])
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
+  const [addNewPost, result] = useAddNewPostMutation();
+  async function submitPost(){
+    addNewPost({
+      user_token: loggedInUserData?.token,
+      title,
+      content,
+    })
+  }
   useEffect(() => {
     if (result.data) {
-      const nextPageForPost = result.data
-      setPostList([...postList, ...nextPageForPost])
-      if (nextPageForPost.length > 0) {
-        setLastOldestPostId(nextPageForPost[nextPageForPost.length - 1].id) //assuming post has already been sorted descending from backend
-      } else {
-        setReachedEndOfPage(true)
-      }
+      setTitle("")
+      setContent("")
+      alert("Success creating post")
     } else if (result.error) {
       alert(JSON.stringify(result.error, null, 2))
     }
   }, [result.data, result.error]);
-
+  
   return (
     <div className="space-y-3">
       {
@@ -43,84 +45,47 @@ export default function PostAdd() {
       }
       <div className="divide-y divide-gray-400 bg-gray-800 text-white block w-[100%] px-3 pb-3 rounded-xl mx-auto">
         <h2 className="text-center font-bold p-2">Create New Post</h2>
-        {
-          result.isLoading
-          ?
-          <div className="bg-gray-800 text-white block w-[100%] pb-3 pt-2 mx-auto">
-            <p className="text-center">
-              Please wait...
-            </p>
-          </div>
-          :
-          <></>
-        }
-        {
-          postList.length === 0 && reachedEndOfPage
-          ?
-          <div className="bg-gray-800 text-white block w-[100%] pb-3 pt-2 mx-auto">
-            <p className="text-center">
-              No post available
-            </p>
-          </div>
-          :
-          <></>
-        }
-        {
-          !result.isLoading && postList.length > 0
-          ?
-          <ul role="list" className="pt-3 grid grid-cols-1 gap-6">
-            {postList
-              .map(post => {
-                return (
-                  <li
-                    key={post.id}
-                    className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-gray-900 hover:bg-black text-center shadow border"
-                  >
-                    <div className="flex flex-1 flex-col p-8">
-                      <h3 className="text-sm font-medium text-gray-200">{post.title}</h3>
-                      <p className="text-sm text-gray-200">{post.content}</p>
-                    </div>
-                  </li>
-                )
-              })
-            }
-          </ul>
-          :
-          <></>
-        }
-        {
-          reachedEndOfPage
-          ?
-          <div className="flex flex-1 justify-between sm:justify-end mt-2 pt-2 gap-2 items-center">
-            <p>
-              No more posts to load
-            </p>
-          </div>
-          :
-          <div className="flex flex-1 justify-between sm:justify-end mt-2 pt-2 gap-2 items-center">
-            <p>
-              Limit per page:
-            </p>
+        <div className="bg-gray-800 text-white block w-[100%] pb-3 pt-2 mx-auto">
+          <label htmlFor="title" className="block text-sm font-medium leading-6 text-gray-900 text-white">
+            Title:
+          </label>
+          <div className="mt-2">
             <input
-              id="pageLimit"
-              name="pageLimit"
-              type="number"
-              value={pageLimit}
+              id="title"
+              name="title"
+              type="text"
+              value={title}
               onChange={(event) => {
-                setPageLimit(parseInt(event.target.value) ?? 0)
+                setTitle(event.target.value)
               }}
-              className="block w-[60px] text-center rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
-            <button
-              onClick={() => {
-                trigger({limit: pageLimit, last_oldest_post_id: lastOldestPostId})
-              }}
-              className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
-            >
-              {postList.length === 0 && !reachedEndOfPage ? "Get First Page" : "Get Next Page"}
-            </button>
           </div>
-        }
+          <label htmlFor="content" className="block text-sm font-medium leading-6 text-gray-900 text-white">
+            Content:
+          </label>
+          <div className="mt-2">
+            <input
+              id="content"
+              name="content"
+              type="text"
+              value={content}
+              onChange={(event) => {
+                setContent(event.target.value)
+              }}
+              className="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+        <div className="bg-gray-800 text-white block w-[100%] pb-3 pt-2 mx-auto">
+          <button
+            onClick={submitPost}
+            disabled={result.isLoading}
+            className="disabled:bg-slate-600 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   )

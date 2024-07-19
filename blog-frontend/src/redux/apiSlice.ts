@@ -1,9 +1,10 @@
-import { PostListResponseData } from '@/utils/types';
+import { env } from '@/env.mjs';
+import { NewPostValues, PostListResponseData } from '@/utils/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: env.NEXT_PUBLIC_BACKEND_URL }),
   refetchOnFocus: false,
   endpoints: (builder) => ({
     getPostList: builder.query<
@@ -14,9 +15,20 @@ export const apiSlice = createApi({
         url: `/posts?limit=${limit}&last_oldest_post_id=${last_oldest_post_id ?? ""}`,
       }),
     }),
+    addNewPost: builder.mutation({
+      query: (payload: NewPostValues & {user_token: string | undefined}) => ({
+        url: `/posts`,
+        headers: {
+          "Authorization": "Bearer " + payload.user_token,
+        },
+        method: 'POST',
+        body: payload,
+      }),
+    }),
   }),
 });
 
 export const {
   useLazyGetPostListQuery,
+  useAddNewPostMutation,
 } = apiSlice

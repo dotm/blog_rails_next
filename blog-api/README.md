@@ -2,9 +2,6 @@
 
 ## TODO
 
-- implement front end
-  - create new post
-  - get first page automatically
 - generate Swagger docs
 - create unit test for BE and FE
 - Dockerize?

@@ -11,9 +11,12 @@ export default function PostList() {
   const [reachedEndOfPage, setReachedEndOfPage] = useState(false)
   const [trigger, result] = useLazyGetPostListQuery();
   const [postList, setPostList] = useState<PostData[]>([])
+  function fetchPost() {
+    trigger({limit: pageLimit, last_oldest_post_id: lastOldestPostId})
+  }
   useEffect(() => {
-    if (result.data) {
-      const nextPageForPost = result.data
+    if (result.data?.data) {
+      const nextPageForPost = result.data.data
       setPostList([...postList, ...nextPageForPost])
       if (nextPageForPost.length > 0) {
         setLastOldestPostId(nextPageForPost[nextPageForPost.length - 1].id) //assuming post has already been sorted descending from backend
@@ -23,7 +26,15 @@ export default function PostList() {
     } else if (result.error) {
       alert(JSON.stringify(result.error, null, 2))
     }
-  }, [result.data, result.error]);
+  }, [result.data?.data, result.error]);
+
+  //trigger initial load
+  //commented out in development because this cause duplicate fetch when hot-reloading
+  // useEffect(() => {
+  //   if (postList.length === 0 && !reachedEndOfPage) {
+  //     fetchPost()
+  //   }
+  // }, [postList, reachedEndOfPage]);
 
   return (
     <div className="space-y-3">
@@ -99,7 +110,7 @@ export default function PostList() {
             />
             <button
               onClick={() => {
-                trigger({limit: pageLimit, last_oldest_post_id: lastOldestPostId})
+                fetchPost()
               }}
               className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
             >
