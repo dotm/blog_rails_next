@@ -1,11 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   user: one
-  title: MyString
-  content: MyText
-
+  title: MyString1
+  content: MyText1
 two:
+  id: 2
   user: two
-  title: MyString
-  content: MyText
+  title: MyString2
+  content: MyText2
+three:
+  id: 3
+  user: one
+  title: MyString3
+  content: MyText3
+four:
+  id: 4
+  user: two
+  title: MyString4
+  content: MyText4

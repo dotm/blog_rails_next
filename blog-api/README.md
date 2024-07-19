@@ -16,6 +16,12 @@ not for take-home test:
   - You might also need to run this: bundle exec rails db:migrate
 - To start server: bundle exec rails server
 
+## Run unit test
+
+- bundle exec rake db:test:prepare
+- bundle exec rake db:migrate
+- bundle exec rails test
+
 ## Initial Setup 
 
 Source:
