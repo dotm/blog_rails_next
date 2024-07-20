@@ -16,6 +16,7 @@ Backend (in one terminal tab):
     - For Linux with VSCode: `EDITOR='code --wait' rails credentials:edit`
   - Add this line to credentials.yml.enc:
     - devise_jwt_secret_key: (copy and paste the generated secret here)
+  - Save the changes and then close the file in VSCode to commit the changes.
   - Note: In production, we can share the config/master.key instead of generating for each contributors
 - `bundle exec rails db:migrate`
 - `bundle exec rails server`
