@@ -68,3 +68,4 @@ Notes:
     - the infinite scroll library doesn't work when using low page count.
   - for production, we can use `react-infinite-scroll-component` to implement auto-scroll.
     - ***If you already have many posts in the database, you can checkout the use-infinite-scroll branch to check auto-scroll feature***
+      - make sure to run `npm install` again to install the library.
