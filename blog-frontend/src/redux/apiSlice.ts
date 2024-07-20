@@ -6,6 +6,9 @@ export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: env.NEXT_PUBLIC_BACKEND_URL }),
   refetchOnFocus: false,
+  tagTypes: [
+    'Post',
+  ],
   endpoints: (builder) => ({
     getPostList: builder.query<
       PostListResponseData, //response
@@ -14,6 +17,9 @@ export const apiSlice = createApi({
       query: ({limit, last_oldest_post_id}) => ({
         url: `/posts?limit=${limit}&last_oldest_post_id=${last_oldest_post_id ?? ""}`,
       }),
+      providesTags: (result, error, payload) => [
+        { type: 'Post', payload },
+      ],
     }),
     addNewPost: builder.mutation({
       query: (payload: NewPostValues & {user_token: string | undefined}) => ({
@@ -24,6 +30,9 @@ export const apiSlice = createApi({
         method: 'POST',
         body: payload,
       }),
+      invalidatesTags: [
+        'Post',
+      ],
     }),
   }),
 });

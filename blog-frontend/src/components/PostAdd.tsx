@@ -27,7 +27,11 @@ export default function PostAdd() {
       setContent("")
       alert("Success creating post")
     } else if (result.error) {
-      alert(JSON.stringify(result.error, null, 2))
+      if((result.error as any).originalStatus === 401) {
+        alert("You need to sign in before creating post.")
+      } else {
+        alert(JSON.stringify(result.error, null, 2))
+      }
     }
   }, [result.data, result.error]);
   
