@@ -7,6 +7,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Run unit test
 
+- npm install
 - npm run test
 
 ## Test in Local Manually
