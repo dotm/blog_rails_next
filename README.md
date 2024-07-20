@@ -5,6 +5,7 @@ Backend (in one terminal tab):
 - `cd blog-api`
 - `bundle install`
 - Setup JWT:
+  - For testing purpose, if you encounter ``method_missing': :devise_jwt_secret_key is blank`, please re-do the steps below.
   - Delete these files if you have them locally:
     - config/master.key
     - config/credentials.yml.enc
